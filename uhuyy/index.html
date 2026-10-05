@@ -1,0 +1,1370 @@
+
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+
+  <title>Maafin Aku — Yuki</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      min-height: 100vh;
+      font-family: "Poppins", sans-serif;
+      color: #43516b;
+      overflow-x: hidden;
+
+      background:
+        radial-gradient(
+          circle at 20% 20%,
+          rgba(255,255,255,.8) 1px,
+          transparent 2px
+        ),
+        radial-gradient(
+          circle at 80% 70%,
+          rgba(255,255,255,.7) 1px,
+          transparent 2px
+        ),
+        linear-gradient(
+          135deg,
+          #dceeff,
+          #eee4ff,
+          #dff5ff
+        );
+
+      background-size:
+        90px 90px,
+        120px 120px,
+        cover;
+    }
+
+
+    /* =========================
+       OPENING
+    ========================== */
+
+    .opening {
+      min-height: 100vh;
+
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      text-align: center;
+
+      padding: 24px;
+    }
+
+    .opening-box {
+      width: min(100%, 430px);
+
+      padding: 38px 24px;
+
+      border-radius: 28px;
+
+      background: rgba(255,255,255,.68);
+
+      backdrop-filter: blur(12px);
+
+      box-shadow:
+        0 20px 50px rgba(80,100,150,.15);
+
+      animation: openingAppear .8s ease;
+    }
+
+    .opening h1 {
+      font-family: "Dancing Script", cursive;
+
+      font-size: clamp(58px, 16vw, 85px);
+
+      line-height: 1;
+
+      background:
+        linear-gradient(
+          135deg,
+          #647cff,
+          #9d71ff,
+          #58baff
+        );
+
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+
+      margin-bottom: 18px;
+    }
+
+    .opening h2 {
+      font-size: 20px;
+
+      color: #4b5870;
+
+      margin-bottom: 12px;
+    }
+
+    .opening p {
+      font-size: 14px;
+
+      line-height: 1.8;
+
+      color: #6b7890;
+
+      margin-bottom: 25px;
+    }
+
+    .open-btn {
+      border: none;
+
+      cursor: pointer;
+
+      padding: 13px 25px;
+
+      border-radius: 999px;
+
+      font-family: "Poppins", sans-serif;
+
+      font-size: 14px;
+
+      font-weight: 600;
+
+      color: white;
+
+      background:
+        linear-gradient(
+          135deg,
+          #7186ff,
+          #9b75ff
+        );
+
+      box-shadow:
+        0 8px 20px rgba(115,120,255,.28);
+
+      transition: .25s ease;
+    }
+
+    .open-btn:hover {
+      transform:
+        translateY(-3px)
+        scale(1.03);
+
+      box-shadow:
+        0 12px 25px rgba(115,120,255,.38);
+    }
+
+    .open-btn:active {
+      transform: scale(.94);
+    }
+
+
+    /* =========================
+       MAIN
+    ========================== */
+
+    #main {
+      display: none;
+
+      padding:
+        55px
+        18px
+        70px;
+    }
+
+    .container {
+      width: min(100%, 850px);
+
+      margin: auto;
+    }
+
+
+    /* =========================
+       TITLE
+    ========================== */
+
+    .main-title {
+      text-align: center;
+
+      margin-bottom: 32px;
+    }
+
+    .main-title h1 {
+      font-family: "Dancing Script", cursive;
+
+      font-size:
+        clamp(
+          48px,
+          12vw,
+          75px
+        );
+
+      background:
+        linear-gradient(
+          135deg,
+          #627cff,
+          #a16cff,
+          #54bfff
+        );
+
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .main-title p {
+      margin-top: 4px;
+
+      color: #718097;
+
+      font-size: 14px;
+    }
+
+
+    /* =========================
+       POLAROID
+    ========================== */
+
+    .photo-grid {
+      display: grid;
+
+      grid-template-columns:
+        repeat(2, 1fr);
+
+      gap: 18px;
+
+      margin-bottom: 38px;
+    }
+
+    .photo {
+      --rotate: 0deg;
+
+      position: relative;
+
+      background:
+        rgba(255,255,255,.94);
+
+      padding:
+        8px
+        8px
+        15px;
+
+      border-radius: 7px;
+
+      box-shadow:
+        0 10px 22px
+        rgba(70,90,120,.15);
+
+      transform:
+        rotate(var(--rotate));
+
+      cursor: pointer;
+
+      user-select: none;
+
+      transition:
+        transform .35s cubic-bezier(.2,.8,.2,1),
+        box-shadow .35s ease,
+        filter .35s ease;
+
+      animation:
+        photoAppear .8s ease both;
+
+      animation-delay:
+        calc(var(--delay) * 1ms);
+    }
+
+
+    /* ROTASI SETIAP FOTO */
+
+    .photo:nth-child(1) {
+      --rotate: -2deg;
+      --delay: 100;
+    }
+
+    .photo:nth-child(2) {
+      --rotate: 2deg;
+      --delay: 180;
+    }
+
+    .photo:nth-child(3) {
+      --rotate: -1deg;
+      --delay: 260;
+    }
+
+    .photo:nth-child(4) {
+      --rotate: 2deg;
+      --delay: 340;
+    }
+
+    .photo:nth-child(5) {
+      --rotate: -2deg;
+      --delay: 420;
+    }
+
+    .photo:nth-child(6) {
+      --rotate: 1deg;
+      --delay: 500;
+    }
+
+    .photo:nth-child(7) {
+      --rotate: 2deg;
+      --delay: 580;
+
+      grid-column:
+        1 / -1;
+
+      width:
+        min(100%, 210px);
+
+      justify-self:
+        center;
+    }
+
+
+    /* =========================
+       EFEK MELAYANG
+    ========================== */
+
+    .photo:nth-child(1),
+    .photo:nth-child(3),
+    .photo:nth-child(5) {
+      animation:
+        photoAppear .8s ease both,
+        floatingLeft 4s ease-in-out
+        1s infinite;
+    }
+
+    .photo:nth-child(2),
+    .photo:nth-child(4),
+    .photo:nth-child(6) {
+      animation:
+        photoAppear .8s ease both,
+        floatingRight 4.5s ease-in-out
+        1.2s infinite;
+    }
+
+    .photo:nth-child(7) {
+      animation:
+        photoAppear .8s ease both,
+        floatingCenter 4.2s ease-in-out
+        1.4s infinite;
+    }
+
+
+    /* =========================
+       HOVER
+    ========================== */
+
+    .photo:hover {
+      transform:
+        rotate(0deg)
+        translateY(-9px)
+        scale(1.04);
+
+      box-shadow:
+        0 20px 35px
+        rgba(74,91,130,.22);
+
+      filter:
+        brightness(1.03);
+    }
+
+
+    /* =========================
+       SAAT DIKLIK
+    ========================== */
+
+    .photo.clicked {
+      animation:
+        polaroidClick .65s
+        cubic-bezier(.2,.8,.2,1);
+
+      z-index: 20;
+    }
+
+    @keyframes polaroidClick {
+
+      0% {
+        transform:
+          rotate(var(--rotate))
+          scale(1)
+          translateY(0);
+
+        box-shadow:
+          0 10px 22px
+          rgba(70,90,120,.15);
+
+        filter:
+          brightness(1);
+      }
+
+      25% {
+        transform:
+          rotate(-5deg)
+          scale(.95)
+          translateY(5px);
+      }
+
+      50% {
+        transform:
+          rotate(4deg)
+          scale(1.10)
+          translateY(-15px);
+
+        box-shadow:
+          0 25px 45px
+          rgba(102,116,255,.30);
+
+        filter:
+          brightness(1.06);
+      }
+
+      75% {
+        transform:
+          rotate(-2deg)
+          scale(1.04)
+          translateY(-5px);
+      }
+
+      100% {
+        transform:
+          rotate(var(--rotate))
+          scale(1)
+          translateY(0);
+
+        box-shadow:
+          0 10px 22px
+          rgba(70,90,120,.15);
+
+        filter:
+          brightness(1);
+      }
+    }
+
+
+    /* =========================
+       FOTO
+    ========================== */
+
+    .photo img {
+      display: block;
+
+      width: 100%;
+
+      aspect-ratio:
+        1 / 1;
+
+      object-fit: cover;
+
+      border-radius: 4px;
+
+      transition:
+        transform .35s ease;
+    }
+
+    .photo.clicked img {
+      transform:
+        scale(1.02);
+    }
+
+    .photo p {
+      text-align: center;
+
+      margin-top: 9px;
+
+      font-family:
+        "Dancing Script",
+        cursive;
+
+      font-size: 17px;
+
+      color: #64718a;
+    }
+
+
+    /* =========================
+       PUISI
+    ========================== */
+
+    .message-box {
+      background:
+        rgba(255,255,255,.72);
+
+      backdrop-filter:
+        blur(12px);
+
+      border-radius:
+        25px;
+
+      padding:
+        28px
+        22px;
+
+      box-shadow:
+        0 15px 35px
+        rgba(70,90,120,.12);
+
+      margin-top: 15px;
+
+      text-align: center;
+    }
+
+    .message-box h2 {
+      font-family:
+        "Dancing Script",
+        cursive;
+
+      font-size: 35px;
+
+      background:
+        linear-gradient(
+          135deg,
+          #667dff,
+          #a170ff,
+          #59bfff
+        );
+
+      -webkit-background-clip:
+        text;
+
+      background-clip:
+        text;
+
+      color: transparent;
+
+      margin-bottom: 18px;
+    }
+
+    .poem {
+      font-family:
+        "Dancing Script",
+        cursive;
+
+      font-size: 20px;
+
+      line-height: 1.8;
+
+      color: #66748c;
+    }
+
+    .poem strong {
+      display: block;
+
+      margin-top: 10px;
+
+      font-size: 23px;
+
+      background:
+        linear-gradient(
+          135deg,
+          #667dff,
+          #a170ff,
+          #59bfff
+        );
+
+      -webkit-background-clip:
+        text;
+
+      background-clip:
+        text;
+
+      color: transparent;
+    }
+
+
+    /* =========================
+       FINAL
+    ========================== */
+
+    .final {
+      text-align: center;
+
+      padding:
+        55px
+        15px
+        10px;
+    }
+
+    .final h2 {
+      font-family:
+        "Dancing Script",
+        cursive;
+
+      font-size:
+        clamp(
+          48px,
+          13vw,
+          75px
+        );
+
+      background:
+        linear-gradient(
+          135deg,
+          #667dff,
+          #a16dff,
+          #55c0ff
+        );
+
+      -webkit-background-clip:
+        text;
+
+      background-clip:
+        text;
+
+      color: transparent;
+    }
+
+    .final h3 {
+      font-size: 19px;
+
+      color: #53617a;
+
+      margin-top: 3px;
+    }
+
+    .final p {
+      font-size: 14px;
+
+      line-height: 1.8;
+
+      color: #718097;
+
+      margin:
+        14px
+        auto
+        20px;
+
+      max-width: 500px;
+    }
+
+    .stars {
+      font-size: 23px;
+
+      letter-spacing: 5px;
+
+      animation:
+        starPulse 2s ease-in-out
+        infinite;
+    }
+
+
+    /* =========================
+       BINTANG BACKGROUND
+    ========================== */
+
+    .floating-star {
+      position: fixed;
+
+      pointer-events: none;
+
+      z-index: 0;
+
+      opacity: .55;
+
+      animation:
+        floatStar linear forwards;
+    }
+
+    @keyframes floatStar {
+
+      0% {
+        transform:
+          translateY(20px)
+          scale(.6)
+          rotate(0deg);
+
+        opacity: 0;
+      }
+
+      20% {
+        opacity: .65;
+      }
+
+      100% {
+        transform:
+          translateY(-110vh)
+          scale(1)
+          rotate(180deg);
+
+        opacity: 0;
+      }
+    }
+
+
+    /* =========================
+       ANIMASI FOTO MUNCUL
+    ========================== */
+
+    @keyframes photoAppear {
+
+      from {
+        opacity: 0;
+
+        transform:
+          translateY(30px)
+          rotate(0deg)
+          scale(.94);
+      }
+
+      to {
+        opacity: 1;
+
+        transform:
+          translateY(0)
+          rotate(var(--rotate))
+          scale(1);
+      }
+    }
+
+
+    /* =========================
+       FLOATING POLAROID
+    ========================== */
+
+    @keyframes floatingLeft {
+
+      0%,
+      100% {
+        transform:
+          rotate(var(--rotate))
+          translateY(0);
+      }
+
+      50% {
+        transform:
+          rotate(
+            calc(var(--rotate) + 1deg)
+          )
+          translateY(-5px);
+      }
+    }
+
+    @keyframes floatingRight {
+
+      0%,
+      100% {
+        transform:
+          rotate(var(--rotate))
+          translateY(0);
+      }
+
+      50% {
+        transform:
+          rotate(
+            calc(var(--rotate) - 1deg)
+          )
+          translateY(-6px);
+      }
+    }
+
+    @keyframes floatingCenter {
+
+      0%,
+      100% {
+        transform:
+          rotate(var(--rotate))
+          translateY(0);
+      }
+
+      50% {
+        transform:
+          rotate(
+            calc(var(--rotate) + 1deg)
+          )
+          translateY(-7px);
+      }
+    }
+
+
+    /* =========================
+       STAR PULSE
+    ========================== */
+
+    @keyframes starPulse {
+
+      0%,
+      100% {
+        transform:
+          scale(1);
+
+        opacity: .8;
+      }
+
+      50% {
+        transform:
+          scale(1.08);
+
+        opacity: 1;
+      }
+    }
+
+
+    /* =========================
+       OPENING ANIMATION
+    ========================== */
+
+    @keyframes openingAppear {
+
+      from {
+        opacity: 0;
+
+        transform:
+          translateY(20px)
+          scale(.96);
+      }
+
+      to {
+        opacity: 1;
+
+        transform:
+          translateY(0)
+          scale(1);
+      }
+    }
+
+
+    /* =========================
+       TABLET
+    ========================== */
+
+    @media (min-width: 600px) {
+
+      #main {
+        padding-left: 25px;
+        padding-right: 25px;
+      }
+
+      .photo-grid {
+        grid-template-columns:
+          repeat(3, 1fr);
+
+        gap: 20px;
+      }
+
+      .photo:nth-child(7) {
+        grid-column:
+          1 / -1;
+
+        width: 220px;
+
+        justify-self: center;
+      }
+
+      .message-box {
+        padding: 32px;
+      }
+    }
+
+
+    /* =========================
+       DESKTOP
+    ========================== */
+
+    @media (min-width: 900px) {
+
+      .photo-grid {
+        gap: 24px;
+      }
+
+      .photo:nth-child(7) {
+        width: 230px;
+      }
+
+      .message-box {
+        padding:
+          35px
+          40px;
+      }
+    }
+
+
+    /* =========================
+       MOBILE
+    ========================== */
+
+    @media (max-width: 599px) {
+
+      .photo-grid {
+        gap: 15px;
+      }
+
+      .photo {
+        padding:
+          7px
+          7px
+          13px;
+      }
+
+      .photo p {
+        font-size: 16px;
+      }
+
+      .poem {
+        font-size: 19px;
+      }
+
+      .message-box {
+        padding:
+          25px
+          17px;
+      }
+    }
+
+
+    /* =========================
+       TOUCHSCREEN
+    ========================== */
+
+    @media (hover: none) and (pointer: coarse) {
+
+      .photo:hover {
+        transform:
+          rotate(var(--rotate));
+
+        box-shadow:
+          0 10px 22px
+          rgba(70,90,120,.15);
+
+        filter:
+          none;
+      }
+
+      .open-btn:hover {
+        transform: none;
+      }
+    }
+
+
+    /* =========================
+       REDUCE MOTION
+    ========================== */
+
+    @media (prefers-reduced-motion: reduce) {
+
+      *,
+      *::before,
+      *::after {
+        animation-duration:
+          .01ms !important;
+
+        animation-iteration-count:
+          1 !important;
+
+        scroll-behavior:
+          auto !important;
+      }
+    }
+
+  </style>
+</head>
+
+
+<body>
+
+
+  <!-- =========================
+       OPENING
+  ========================== -->
+
+  <section
+    class="opening"
+    id="opening"
+  >
+
+    <div class="opening-box">
+
+      <h1>
+       Yuki
+      </h1>
+
+      <h2>
+        Aku punya sesuatu...
+      </h2>
+
+      <p>
+        buat kamu,semoga kamu suka ya
+      </p>
+
+      <button
+        class="open-btn"
+        onclick="openMessage()"
+      >
+        buka pesan
+      </button>
+
+    </div>
+
+  </section>
+
+
+  <!-- =========================
+       MAIN
+  ========================== -->
+
+  <main id="main">
+
+    <div class="container">
+
+
+      <!-- JUDUL -->
+
+      <div class="main-title">
+
+        <h1>
+          Maafin Aku
+        </h1>
+
+
+      </div>
+
+
+      <!-- =========================
+           FOTO POLAROID
+      ========================== -->
+
+      <div class="photo-grid">
+
+
+        <!-- SATU -->
+
+        <div class="photo">
+
+          <img
+            src="satu.jpeg"
+            alt="Foto satu"
+          >
+
+          <p>
+            maafin aku ya 🥺
+          </p>
+
+        </div>
+
+
+        <!-- DUA -->
+
+        <div class="photo">
+
+          <img
+            src="dua.jpeg"
+            alt="Foto dua"
+          >
+
+          <p>
+            hampura
+          </p>
+
+        </div>
+
+
+        <!-- TIGA -->
+
+        <div class="photo">
+
+          <img
+            src="tiga.jpeg"
+            alt="Foto tiga"
+          >
+
+          <p>
+            I’m sorry
+          </p>
+
+        </div>
+
+
+        <!-- EMPAT -->
+
+        <div class="photo">
+
+          <img
+            src="empat.jpeg"
+            alt="Foto empat"
+          >
+
+          <p>
+            I didn’t mean to hurt u
+          </p>
+
+        </div>
+
+
+        <!-- LIMA -->
+
+        <div class="photo">
+
+          <img
+            src="lima.jpeg"
+            alt="Foto lima"
+          >
+
+          <p>
+            Gomen ne
+          </p>
+
+        </div>
+
+
+        <!-- ENAM -->
+
+        <div class="photo">
+
+          <img
+            src="enam.jpeg"
+            alt="Foto enam"
+          >
+
+          <p>
+           Please forgive me
+          </p>
+
+        </div>
+
+
+        <!-- TUJUH -->
+
+        <div class="photo">
+
+          <img
+            src="tujuh.jpg"
+            alt="Foto tujuh"
+          >
+
+          <p>
+            I hope u can forgive me.
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <!-- =========================
+           PUISI
+      ========================== -->
+
+      <div class="message-box">
+
+        <h2>
+          Untuk Yuki...
+        </h2>
+
+        <div class="poem">
+
+          Maaf kalau kemarin<br>
+
+          ada sikapku yang bikin kecewa.<br>
+
+          Maaf kalau kata-kataku<br>
+
+          sempat membuatmu terluka.<br><br>
+
+
+          Aku nggak bisa mengulang waktu,<br>
+
+          tapi aku bisa belajar dari salahku.<br><br>
+
+
+          Nggak banyak yang ingin aku minta,<br>
+
+          cuma satu...
+
+          <strong>
+            Ngapura , ya
+          </strong>
+
+        </div>
+
+      </div>
+
+
+      <!-- =========================
+           PENUTUP
+      ========================== -->
+
+      <div class="final">
+
+        <h2>
+          Yuki
+        </h2>
+
+        <h3>
+          Yurushite kureru?
+        </h3>
+
+        <p>
+          Thank you for reading!
+        </p>
+
+        <div class="stars">
+          ✨ ⭐ ✨
+        </div>
+
+      </div>
+
+    </div>
+
+  </main>
+
+
+  <!-- =========================
+       JAVASCRIPT
+  ========================== -->
+
+  <script>
+
+
+    /* =========================
+       BUKA WEBSITE
+    ========================== */
+
+    function openMessage() {
+
+      const opening =
+        document.getElementById("opening");
+
+      const main =
+        document.getElementById("main");
+
+      opening.style.display =
+        "none";
+
+      main.style.display =
+        "block";
+
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+      });
+
+    }
+
+
+    /* =========================
+       EFEK FOTO SAAT DIKLIK
+    ========================== */
+
+    const photos =
+      document.querySelectorAll(".photo");
+
+
+    photos.forEach((photo) => {
+
+      photo.addEventListener(
+        "click",
+        function() {
+
+          this.classList.remove(
+            "clicked"
+          );
+
+          void this.offsetWidth;
+
+          this.classList.add(
+            "clicked"
+          );
+
+
+          setTimeout(() => {
+
+            this.classList.remove(
+              "clicked"
+            );
+
+          }, 650);
+
+        }
+      );
+
+    });
+
+
+    /* =========================
+       BINTANG-BINTANG
+    ========================== */
+
+    const starSymbols = [
+      "⭐",
+      "✨",
+      "🌟",
+      "💫"
+    ];
+
+
+    function createFloatingStar() {
+
+      const star =
+        document.createElement("div");
+
+      star.className =
+        "floating-star";
+
+      star.textContent =
+        starSymbols[
+          Math.floor(
+            Math.random() *
+            starSymbols.length
+          )
+        ];
+
+
+      star.style.left =
+        Math.random() * 100 + "vw";
+
+
+      star.style.bottom =
+        "-30px";
+
+
+      star.style.fontSize =
+        (
+          9 +
+          Math.random() * 12
+        ) + "px";
+
+
+      const duration =
+        5 +
+        Math.random() * 6;
+
+
+      star.style.animationDuration =
+        duration + "s";
+
+
+      document.body.appendChild(
+        star
+      );
+
+
+      setTimeout(() => {
+
+        star.remove();
+
+      }, duration * 1000);
+
+    }
+
+
+    setInterval(
+      createFloatingStar,
+      900
+    );
+
+
+  </script>
+
+</body>
+</html>
+```
